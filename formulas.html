@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Công thức Vật Lý 10 — Newton</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/formulas.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       NAVBAR
+       ══════════════════════════════════════════ -->
+  <nav class="navbar" role="navigation" aria-label="Điều hướng chính">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo" aria-label="Newton - Trang chủ">
+        <div class="navbar__logo-icon" aria-hidden="true">N</div>
+        Newton
+      </a>
+      <ul class="navbar__links" role="list">
+        <li><a href="index.html">Giới thiệu</a></li>
+        <li><a href="formulas.html">Công thức</a></li>
+        <li><a href="lab.html">Phòng thí nghiệm</a></li>
+        <li><a href="calculator.html">Máy tính</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+      </ul>
+      <div class="navbar__search" role="search">
+        <svg class="navbar__search-icon" aria-hidden="true"
+             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+            clip-rule="evenodd"/>
+        </svg>
+        <input type="search" id="navSearchInput" placeholder="Tìm kiếm..."
+               autocomplete="off" aria-label="Tìm kiếm công thức hoặc trang"
+               aria-expanded="false" aria-controls="navSearchDropdown"/>
+        <div id="navSearchDropdown" class="navbar__search-dropdown" role="listbox"></div>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ══════════════════════════════════════════
+       LAYOUT: SIDEBAR + NỘI DUNG
+       ══════════════════════════════════════════ -->
+  <div class="formulas-layout">
+
+    <!-- ── Sidebar ── -->
+    <aside class="sidebar" aria-label="Danh mục chuyên đề">
+      <div class="sidebar__title">Chuyên đề Vật Lý 10</div>
+      <nav id="sidebarSubjects" aria-label="Chuyên đề"></nav>
+    </aside>
+
+
+    <!-- ── Vùng nội dung ── -->
+    <main class="formulas-content" aria-live="polite" aria-label="Danh sách công thức">
+
+      <!-- Header -->
+      <div class="formulas-content__header">
+        <div class="formulas-content__breadcrumb" id="contentBreadcrumb">
+          Vật Lý 10
+        </div>
+        <h1 class="formulas-content__title" id="contentTitle">
+          Đang tải...
+        </h1>
+        <p class="formulas-content__subtitle" id="contentSubtitle"></p>
+      </div>
+
+      <!-- Ô tìm kiếm text -->
+      <div class="formula-search-bar" role="search" aria-label="Tìm kiếm công thức">
+        <div class="formula-search-bar__inner">
+          <svg class="formula-search-bar__icon" aria-hidden="true"
+               xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+              clip-rule="evenodd"/>
+          </svg>
+          <input type="search"
+                 id="formulaSearchInput"
+                 placeholder="Tìm công thức, đại lượng (v, F, a...)..."
+                 autocomplete="off"
+                 aria-label="Tìm kiếm trong danh sách công thức"
+                 oninput="searchFormulas(this.value)"/>
+          <button class="formula-search-bar__clear"
+                  id="formulaSearchClear"
+                  onclick="clearSearch()"
+                  aria-label="Xóa tìm kiếm"
+                  style="display:none">✕</button>
+        </div>
+        <div class="formula-search-bar__hint" id="formulaSearchHint"></div>
+      </div>
+
+      <!-- Tag lọc -->
+      <div class="tag-bar" id="tagBar" role="group" aria-label="Lọc theo đại lượng"></div>
+
+      <!-- Danh sách thẻ công thức -->
+      <div class="formula-list" id="formulaList"></div>
+
+    </main>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       FAB Newton AI
+       ══════════════════════════════════════════ -->
+  <a href="newton-ai.html" class="fab-newton"
+     aria-label="Mở Newton AI Chatbot" title="Newton AI">
+    <span class="fab-newton__tooltip">Newton AI</span>
+    🤖
+  </a>
+
+
+  <!-- ══════════════════════════════════════════
+       FOOTER
+       ══════════════════════════════════════════ -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+      <div>
+        <div class="footer__brand-name">PHYSICS 10 — VẬT LÝ 10</div>
+        <p class="footer__brand-sub">Website học tập dành riêng cho lớp 10</p>
+      </div>
+      <div>
+        <div class="footer__col-title">Bộ công cụ</div>
+        <ul class="footer__links" role="list">
+          <li><a href="formulas.html">📐 Sổ tay công thức</a></li>
+          <li><a href="lab.html">🔬 Phòng thí nghiệm</a></li>
+          <li><a href="calculator.html">🧮 Máy tính SI</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="footer__divider"/>
+    <p class="footer__bottom">
+      © 2026 Newton · Nhóm 2 · 10.1 ICT · Website học tập Vật Lý 10
+    </p>
+  </footer>
+
+
+  <!-- Scripts: data trước, logic sau -->
+  <script src="data/formulas.js"></script>
+  <script src="js/formulas.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

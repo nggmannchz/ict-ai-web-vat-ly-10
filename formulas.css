@@ -1,0 +1,432 @@
+/* ================================================
+   formulas.css — CSS riêng cho trang Công thức
+   ================================================ */
+
+/* ---------- Layout tổng: sidebar + nội dung ---------- */
+.formulas-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: calc(100vh - var(--navbar-height));
+  background: var(--white-gray);
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+  background: #fff;
+  border-right: 1.5px solid var(--gray-200);
+  padding: 24px 0;
+  position: sticky;
+  top: var(--navbar-height);
+  height: calc(100vh - var(--navbar-height));
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidebar__title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 0.78rem;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0 20px 12px;
+}
+
+/* Chuyên đề lớn */
+.sidebar__subject {
+  margin-bottom: 4px;
+}
+
+.sidebar__subject-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--gray-700, #374151);
+  text-align: left;
+  transition: background var(--transition), color var(--transition);
+  border-radius: 0;
+}
+
+.sidebar__subject-btn:hover {
+  background: var(--gray-100);
+  color: var(--blue);
+}
+
+.sidebar__subject-btn.active {
+  color: var(--blue);
+  background: var(--blue-light);
+}
+
+.sidebar__subject-icon {
+  font-size: 1rem;
+  width: 20px;
+  text-align: center;
+}
+
+.sidebar__subject-chevron {
+  margin-left: auto;
+  font-size: 0.7rem;
+  transition: transform var(--transition);
+  color: var(--gray-400);
+}
+
+.sidebar__subject-btn.open .sidebar__subject-chevron {
+  transform: rotate(90deg);
+}
+
+/* Mục con (topics) */
+.sidebar__topics {
+  display: none;
+  padding-left: 20px;
+  border-left: 2px solid var(--blue-light);
+  margin-left: 30px;
+}
+
+.sidebar__topics.open {
+  display: block;
+}
+
+.sidebar__topic-btn {
+  width: 100%;
+  display: block;
+  padding: 8px 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--gray-600);
+  text-align: left;
+  border-radius: var(--radius);
+  transition: background var(--transition), color var(--transition);
+}
+
+.sidebar__topic-btn:hover {
+  background: var(--gray-100);
+  color: var(--blue);
+}
+
+.sidebar__topic-btn.active {
+  color: var(--blue);
+  font-weight: 700;
+  background: var(--blue-light);
+}
+
+/* ---------- Vùng nội dung ---------- */
+.formulas-content {
+  padding: 32px 40px;
+  max-width: 860px;
+}
+
+/* Header khu vực công thức */
+.formulas-content__header {
+  margin-bottom: 24px;
+}
+
+.formulas-content__breadcrumb {
+  font-size: 0.8rem;
+  color: var(--gray-400);
+  margin-bottom: 6px;
+}
+
+.formulas-content__breadcrumb span {
+  color: var(--blue);
+}
+
+.formulas-content__title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: var(--gray-800);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.formulas-content__subtitle {
+  font-size: 0.88rem;
+  color: var(--gray-600);
+  margin-top: 4px;
+}
+
+/* ---------- Tag lọc ---------- */
+.tag-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.tag-btn {
+  padding: 5px 14px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 999px;
+  background: #fff;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition),
+              color var(--transition);
+}
+
+.tag-btn:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.tag-btn.active {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+}
+
+/* ---------- Danh sách công thức ---------- */
+.formula-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Thẻ công thức */
+.formula-card {
+  background: #fff;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0;
+  overflow: hidden;
+  transition: box-shadow var(--transition), border-color var(--transition);
+}
+
+.formula-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--blue);
+}
+
+.formula-card.hidden {
+  display: none;
+}
+
+/* Phần nội dung bên trái thẻ */
+.formula-card__body {
+  padding: 20px 24px;
+  border-right: 1.5px solid var(--gray-200);
+}
+
+.formula-card__name {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--gray-600);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+
+/* Công thức lớn */
+.formula-card__formula {
+  font-family: 'Courier New', 'Consolas', monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--blue);
+  background: var(--blue-light);
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  letter-spacing: 0.04em;
+}
+
+.formula-card__variables {
+  font-size: 0.84rem;
+  color: var(--gray-600);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.formula-card__variables strong {
+  color: var(--gray-800);
+}
+
+/* Lưu ý */
+.formula-card__note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: var(--gray-600);
+  background: #FFFBEB;
+  border: 1px solid #FDE68A;
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  line-height: 1.5;
+}
+
+.formula-card__note::before {
+  content: '💡';
+  flex-shrink: 0;
+}
+
+/* Phần nút bên phải thẻ */
+.formula-card__action {
+  padding: 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--gray-100);
+  min-width: 160px;
+}
+
+.formula-card__action .btn {
+  width: 100%;
+  justify-content: center;
+  font-size: 0.82rem;
+  padding: 8px 14px;
+}
+
+/* ---------- Trạng thái rỗng ---------- */
+.formulas-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--gray-400);
+}
+
+.formulas-empty__icon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+
+.formulas-empty__text {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.formulas-empty__sub {
+  font-size: 0.85rem;
+  margin-top: 6px;
+}
+
+/* ---------- Tiêu đề nhóm topic trong danh sách ---------- */
+.formula-topic-header {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--gray-800);
+  padding: 12px 0 6px;
+  border-bottom: 2px solid var(--blue-light);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.formula-topic-header::before {
+  content: '';
+  width: 4px;
+  height: 18px;
+  background: var(--blue);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ---------- Ô tìm kiếm trong trang Công thức ---------- */
+.formula-search-bar {
+  margin-bottom: 16px;
+}
+
+.formula-search-bar__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.formula-search-bar__icon {
+  position: absolute;
+  left: 14px;
+  width: 17px;
+  height: 17px;
+  color: var(--gray-400);
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.formula-search-bar__inner input[type="search"] {
+  width: 100%;
+  padding: 11px 44px 11px 42px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--gray-800);
+  background: #fff;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.formula-search-bar__inner input[type="search"]:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(2,132,199,.12);
+}
+
+.formula-search-bar__inner input[type="search"]::placeholder {
+  color: var(--gray-400);
+}
+
+/* Xóa nút X mặc định của trình duyệt trên input[type=search] */
+.formula-search-bar__inner input[type="search"]::-webkit-search-cancel-button {
+  display: none;
+}
+
+.formula-search-bar__clear {
+  position: absolute;
+  right: 12px;
+  background: var(--gray-200);
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 0.65rem;
+  color: var(--gray-600);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition);
+}
+
+.formula-search-bar__clear:hover {
+  background: var(--gray-400);
+  color: #fff;
+}
+
+.formula-search-bar__hint {
+  font-size: 0.78rem;
+  color: var(--gray-400);
+  margin-top: 5px;
+  min-height: 1em;
+}
+
+/* Highlight từ khớp trong thẻ công thức */
+.search-highlight {
+  background: #FEF9C3;
+  border-radius: 2px;
+  font-weight: 700;
+}
+
+/* Khi đang tìm kiếm: ẩn tag bar (không dùng song song) */
+.tag-bar.search-active {
+  opacity: 0.4;
+  pointer-events: none;
+}

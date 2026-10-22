@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Máy tính SI — Newton</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/calculator.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       NAVBAR
+       ══════════════════════════════════════════ -->
+  <nav class="navbar" role="navigation" aria-label="Điều hướng chính">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo" aria-label="Newton - Trang chủ">
+        <div class="navbar__logo-icon" aria-hidden="true">N</div>
+        Newton
+      </a>
+      <ul class="navbar__links" role="list">
+        <li><a href="index.html">Giới thiệu</a></li>
+        <li><a href="formulas.html">Công thức</a></li>
+        <li><a href="lab.html">Phòng thí nghiệm</a></li>
+        <li><a href="calculator.html">Máy tính</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+      </ul>
+      <div class="navbar__search" role="search">
+        <svg class="navbar__search-icon" aria-hidden="true"
+             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+            clip-rule="evenodd"/>
+        </svg>
+        <input type="search" id="navSearchInput" placeholder="Tìm kiếm..."
+               autocomplete="off" aria-label="Tìm kiếm"
+               aria-expanded="false" aria-controls="navSearchDropdown"/>
+        <div id="navSearchDropdown" class="navbar__search-dropdown" role="listbox"></div>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ══════════════════════════════════════════
+       PAGE HEADER
+       ══════════════════════════════════════════ -->
+  <header class="calc-page-header">
+    <h1 class="calc-page-header__title">
+      🧮 MÁY TÍNH VẬT LÝ 10 — TỰ ĐỘNG CHUẨN HÓA ĐƠN VỊ SI
+    </h1>
+    <p class="calc-page-header__sub">
+      Nhập giá trị với bất kỳ đơn vị nào — máy sẽ tự quy đổi về chuẩn SI rồi tính kết quả
+    </p>
+  </header>
+
+
+  <!-- ══════════════════════════════════════════
+       LAYOUT CHÍNH
+       ══════════════════════════════════════════ -->
+  <div class="calc-layout">
+
+    <!-- ── Cột trái: Form nhập ── -->
+    <div class="calc-panel">
+      <div class="calc-panel__header">
+        ⚙ Thông số đầu vào
+      </div>
+
+      <div class="calc-panel__body">
+
+        <!-- Bước 1: Chọn công thức -->
+        <div class="calc-step">
+          <div class="calc-step__label" data-step="1">CHỌN CÔNG THỨC CẦN TÍNH</div>
+
+          <select class="formula-select"
+                  id="formulaSelect"
+                  onchange="onFormulaChange()"
+                  aria-label="Chọn công thức Vật Lý">
+            <option value="">-- Chọn công thức --</option>
+          </select>
+
+          <!-- Preview công thức chọn -->
+          <div class="formula-preview" id="formulaPreview" aria-live="polite"></div>
+        </div>
+
+        <!-- Bước 2: Nhập các đại lượng -->
+        <div class="calc-step">
+          <div class="calc-step__label" data-step="2">NHẬP CÁC ĐẠI LƯỢNG ĐÃ BIẾT</div>
+
+          <div class="input-rows" id="inputRows" aria-label="Các đại lượng đầu vào">
+            <p style="color:var(--gray-400);font-size:0.88rem;">
+              Chọn công thức ở bước 1 để nhập số liệu.
+            </p>
+          </div>
+        </div>
+
+        <!-- Bước 3: Đại lượng cần tìm -->
+        <div class="calc-step">
+          <div class="calc-step__label" data-step="3">ĐẠI LƯỢNG CẦN TÌM</div>
+
+          <div class="radio-group" id="radioGroup"
+               role="radiogroup" aria-label="Chọn đại lượng cần tính">
+            <p style="color:var(--gray-400);font-size:0.88rem;">
+              Chọn công thức ở bước 1 trước.
+            </p>
+          </div>
+        </div>
+
+        <!-- Nút tính -->
+        <button class="btn btn-primary btn-calculate"
+                onclick="calculate()"
+                aria-label="Tính toán và đổi đơn vị tự động">
+          ⚡ TÍNH TOÁN VÀ ĐỔI ĐƠN VỊ TỰ ĐỘNG
+        </button>
+
+      </div><!-- /calc-panel__body -->
+    </div><!-- /calc-panel -->
+
+
+    <!-- ── Cột phải: Kết quả ── -->
+    <div class="calc-right">
+
+      <!-- Khung kết quả -->
+      <div class="result-box empty" id="resultBox" aria-live="polite" aria-label="Kết quả tính toán">
+        <div class="result-box__label" id="resultLabel">Kết quả</div>
+        <div class="result-box__value" id="resultValue">—</div>
+        <div class="result-box__unit"  id="resultUnit"></div>
+        <div class="result-box__formula" id="resultFormula"></div>
+      </div>
+
+      <!-- Bảng diễn giải các bước -->
+      <div class="steps-panel" aria-label="Các bước đổi đơn vị và tính toán">
+        <div class="steps-panel__header">📋 Các bước đổi đơn vị &amp; tính toán</div>
+        <div class="steps-list" id="stepsList">
+          <div class="steps-empty">
+            Nhập số liệu và bấm "Tính" để xem các bước.
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /calc-right -->
+
+  </div><!-- /calc-layout -->
+
+
+  <!-- ══════════════════════════════════════════
+       FAB Newton AI
+       ══════════════════════════════════════════ -->
+  <a href="newton-ai.html" class="fab-newton"
+     aria-label="Mở Newton AI Chatbot" title="Newton AI">
+    <span class="fab-newton__tooltip">Newton AI</span>
+    🤖
+  </a>
+
+
+  <!-- ══════════════════════════════════════════
+       FOOTER
+       ══════════════════════════════════════════ -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+      <div>
+        <div class="footer__brand-name">PHYSICS 10 — VẬT LÝ 10</div>
+        <p class="footer__brand-sub">Website học tập dành riêng cho lớp 10</p>
+      </div>
+      <div>
+        <div class="footer__col-title">Bộ công cụ</div>
+        <ul class="footer__links" role="list">
+          <li><a href="formulas.html">📐 Sổ tay công thức</a></li>
+          <li><a href="lab.html">🔬 Phòng thí nghiệm</a></li>
+          <li><a href="calculator.html">🧮 Máy tính SI</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="footer__divider"/>
+    <p class="footer__bottom">
+      © 2026 Newton · Nhóm 2 · 10.1 ICT · Website học tập Vật Lý 10
+    </p>
+  </footer>
+
+
+  <script src="data/formulas.js"></script>
+  <script src="data/calculator.js"></script>
+  <script src="js/calculator.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

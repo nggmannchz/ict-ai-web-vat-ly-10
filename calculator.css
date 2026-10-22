@@ -1,0 +1,404 @@
+/* ================================================
+   calculator.css — CSS riêng cho trang Máy tính SI
+   ================================================ */
+
+/* ---------- Page header ---------- */
+.calc-page-header {
+  background: linear-gradient(135deg, #0F172A 0%, #0c2d48 100%);
+  color: #fff;
+  padding: 32px 24px 28px;
+  text-align: center;
+}
+
+.calc-page-header__title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+
+.calc-page-header__sub {
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+/* ---------- Layout: 2 cột ---------- */
+.calc-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 28px;
+  align-items: start;
+}
+
+/* ---------- Panel chung ---------- */
+.calc-panel {
+  background: #fff;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.calc-panel__header {
+  background: var(--gray-800);
+  color: #fff;
+  padding: 14px 20px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.calc-panel__body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ---------- Step labels ---------- */
+.calc-step {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.calc-step__label {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.78rem;
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.calc-step__label::before {
+  content: attr(data-step);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ---------- Dropdown chọn công thức ---------- */
+.formula-select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--gray-800);
+  background: #fff;
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--transition);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 20 20' fill='%2394a3b8'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+
+.formula-select:focus {
+  border-color: var(--blue);
+}
+
+/* Preview công thức chọn */
+.formula-preview {
+  display: none;
+  background: var(--blue-light);
+  border: 1.5px solid var(--blue);
+  border-radius: var(--radius);
+  padding: 10px 16px;
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--blue);
+  text-align: center;
+}
+
+.formula-preview.show {
+  display: block;
+}
+
+/* ---------- Input rows (đại lượng) ---------- */
+.input-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-row {
+  display: grid;
+  grid-template-columns: 130px 1fr 90px;
+  gap: 8px;
+  align-items: center;
+}
+
+.input-row__label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--gray-700, #374151);
+  white-space: nowrap;
+}
+
+.input-row__label sup {
+  font-size: 0.7em;
+}
+
+.input-row input[type="number"] {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--gray-800);
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+.input-row input[type="number"]:focus {
+  border-color: var(--blue);
+}
+
+.input-row input[type="number"].disabled {
+  background: var(--gray-100);
+  color: var(--gray-400);
+  cursor: not-allowed;
+}
+
+/* Remove spin arrows */
+.input-row input[type="number"]::-webkit-inner-spin-button,
+.input-row input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
+.input-row input[type="number"] { -moz-appearance: textfield; }
+
+.input-row select {
+  width: 100%;
+  padding: 9px 8px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--gray-800);
+  background: #fff;
+  outline: none;
+  cursor: pointer;
+  transition: border-color var(--transition);
+}
+
+.input-row select:focus {
+  border-color: var(--blue);
+}
+
+/* Đại lượng đang là "ẩn" (cần tìm) */
+.input-row.is-unknown input[type="number"] {
+  background: var(--blue-light);
+  border-color: var(--blue);
+  color: var(--blue);
+  font-weight: 700;
+}
+
+/* ---------- Radio: đại lượng cần tìm ---------- */
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.radio-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gray-600);
+  transition: border-color var(--transition), background var(--transition),
+              color var(--transition);
+  user-select: none;
+}
+
+.radio-btn input[type="radio"] {
+  display: none;
+}
+
+.radio-btn:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.radio-btn.selected {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+}
+
+/* ---------- Nút tính ---------- */
+.btn-calculate {
+  width: 100%;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  justify-content: center;
+  border-radius: var(--radius);
+}
+
+/* ---------- Cột phải: Kết quả ---------- */
+.calc-right {
+  position: sticky;
+  top: calc(var(--navbar-height) + 24px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Khung kết quả chính */
+.result-box {
+  background: var(--gray-800);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  text-align: center;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.result-box__label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.result-box__value {
+  font-family: 'Courier New', monospace;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #38BDF8;
+  word-break: break-all;
+}
+
+.result-box__unit {
+  font-size: 1rem;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.result-box__formula {
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+.result-box.empty .result-box__value {
+  font-size: 1rem;
+  color: #475569;
+}
+
+.result-box.error .result-box__value {
+  color: #F87171;
+  font-size: 0.95rem;
+}
+
+/* ---------- Bảng diễn giải các bước ---------- */
+.steps-panel {
+  background: #fff;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.steps-panel__header {
+  padding: 12px 18px;
+  background: var(--gray-100);
+  border-bottom: 1px solid var(--gray-200);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--gray-600);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.steps-list {
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: var(--gray-700, #374151);
+  line-height: 1.5;
+}
+
+.step-item__num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--blue-light);
+  color: var(--blue);
+  font-weight: 800;
+  font-size: 0.72rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.step-item__text strong {
+  color: var(--blue);
+  font-family: 'Courier New', monospace;
+}
+
+.step-item.step-highlight {
+  background: var(--blue-light);
+  border-radius: var(--radius);
+  padding: 8px 10px;
+  margin: 0 -4px;
+}
+
+.step-item.step-highlight .step-item__num {
+  background: var(--blue);
+  color: #fff;
+}
+
+.steps-empty {
+  padding: 24px;
+  text-align: center;
+  color: var(--gray-400);
+  font-size: 0.88rem;
+}

@@ -1,0 +1,335 @@
+/* ================================================
+   lab.css — CSS riêng cho trang Phòng thí nghiệm
+   ================================================ */
+
+/* ---------- Page wrapper ---------- */
+.lab-page {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - var(--navbar-height));
+  background: var(--gray-100);
+}
+
+/* ---------- Header thanh chọn hiện tượng ---------- */
+.lab-header {
+  background: #fff;
+  border-bottom: 1.5px solid var(--gray-200);
+  padding: 16px 24px;
+}
+
+.lab-header__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.lab-header__label {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+.scene-tab {
+  padding: 8px 18px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 999px;
+  background: #fff;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition),
+              color var(--transition);
+  white-space: nowrap;
+}
+
+.scene-tab:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.scene-tab.active {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+}
+
+/* ---------- Main layout: canvas khu + controls ---------- */
+.lab-body {
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 24px;
+  align-items: start;
+}
+
+/* ---------- Cột trái: canvas + controls ---------- */
+
+
+/* Canvas wrapper */
+.canvas-wrapper {
+  background: #fff;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.canvas-wrapper__label {
+  background: var(--gray-800);
+  color: #94a3b8;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.canvas-wrapper__label::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 6px #10B981;
+  flex-shrink: 0;
+}
+
+#simCanvas {
+  display: block;
+  width: 100%;
+  background: #0F172A;
+}
+
+/* Control buttons */
+.sim-controls {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.sim-controls .btn {
+  flex: 1;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+/* Readout — số liệu thời gian thực */
+.sim-readout {
+  background: #fff;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.readout-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.readout-item__label {
+  font-size: 0.75rem;
+  color: var(--gray-400);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.readout-item__value {
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--blue);
+}
+
+/* Thêm readout cho ném ngang/xiên */
+.sim-readout.cols-5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+/* ---------- Đồ thị v-t ---------- */
+.chart-wrapper {
+  background: #fff;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-top: 16px;
+  display: none; /* hiện khi bấm Xuất đồ thị */
+}
+
+.chart-wrapper.show {
+  display: block;
+}
+
+.chart-wrapper__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.chart-wrapper__title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--gray-800);
+}
+
+#vtChart {
+  display: block;
+  width: 100%;
+}
+
+/* ---------- Cột phải: inputs ---------- */
+.lab-right {
+  position: sticky;
+  top: calc(var(--navbar-height) + 24px);
+}
+
+.inputs-panel {
+  background: #fff;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.inputs-panel__header {
+  background: var(--gray-800);
+  color: #fff;
+  padding: 14px 20px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.inputs-panel__body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Một slider row */
+.slider-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.slider-row__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slider-row__label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--gray-700, #374151);
+}
+
+.slider-row__value {
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--blue);
+  min-width: 70px;
+  text-align: right;
+}
+
+input[type="range"] {
+  width: 100%;
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--gray-200);
+  border-radius: 999px;
+  outline: none;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 4px rgba(2,132,199,.4);
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  background: var(--blue-dark);
+  transform: scale(1.15);
+}
+
+input[type="range"]:focus {
+  background: var(--blue-light);
+}
+
+/* Divider */
+.inputs-panel__divider {
+  border: none;
+  border-top: 1px solid var(--gray-200);
+  margin: 0 -20px;
+}
+
+/* Export chart button */
+.inputs-panel__footer {
+  padding: 0 20px 20px;
+}
+
+/* ---------- Thông báo khi vật ra ngoài màn hình ---------- */
+.sim-alert {
+  display: none;
+  background: #FEF3C7;
+  border: 1.5px solid #FDE68A;
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  color: #92400E;
+  margin-top: 12px;
+  align-items: center;
+  gap: 8px;
+}
+
+.sim-alert.show {
+  display: flex;
+}
+
+/* ---------- Scene-specific inputs (ẩn/hiện tuỳ kịch bản) ---------- */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-group.hidden {
+  display: none;
+}

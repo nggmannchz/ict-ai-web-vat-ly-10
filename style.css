@@ -1,0 +1,459 @@
+/* ================================================
+   style.css — CSS chung cho toàn bộ Newton website
+   Màu: #0284C7 (xanh dương - CTA chính)
+         #F8FAFC (trắng xám - CTA phụ / nền)
+         #10B981 (xanh lá - trạng thái đúng)
+         #EF4444 (đỏ - trạng thái sai)
+   Font: Montserrat (tiêu đề), Be Vietnam Pro (nội dung)
+   ================================================ */
+
+/* ---------- Google Fonts ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Be+Vietnam+Pro:wght@400;500;600&display=swap');
+
+/* ---------- Reset & Box-sizing ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- CSS Variables ---------- */
+:root {
+  --blue:       #0284C7;
+  --blue-dark:  #0369A1;
+  --blue-light: #E0F2FE;
+  --white-gray: #F8FAFC;
+  --green:      #10B981;
+  --green-dark: #059669;
+  --red:        #EF4444;
+  --red-dark:   #DC2626;
+  --gray-100:   #F1F5F9;
+  --gray-200:   #E2E8F0;
+  --gray-400:   #94A3B8;
+  --gray-600:   #475569;
+  --gray-800:   #1E293B;
+  --black:      #0F172A;
+
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body:    'Be Vietnam Pro', sans-serif;
+
+  --navbar-height: 64px;
+  --radius:        8px;
+  --radius-lg:     16px;
+  --shadow:        0 2px 8px rgba(0,0,0,.10);
+  --shadow-md:     0 4px 16px rgba(0,0,0,.12);
+  --transition:    0.2s ease;
+}
+
+/* ---------- Base ---------- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--white-gray);
+  color: var(--gray-800);
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: background var(--transition), color var(--transition),
+              border-color var(--transition), transform var(--transition);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+/* Nút CTA chính — xanh dương */
+.btn-primary {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+}
+.btn-primary:hover {
+  background: var(--blue-dark);
+  border-color: var(--blue-dark);
+}
+
+/* Nút CTA phụ — trắng xám viền */
+.btn-secondary {
+  background: var(--white-gray);
+  color: var(--blue);
+  border-color: var(--blue);
+}
+.btn-secondary:hover {
+  background: var(--blue-light);
+}
+
+/* Nút trạng thái đúng — xanh lá */
+.btn-success {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+}
+.btn-success:hover {
+  background: var(--green-dark);
+  border-color: var(--green-dark);
+}
+
+/* Nút trạng thái sai — đỏ */
+.btn-danger {
+  background: var(--red);
+  color: #fff;
+  border-color: var(--red);
+}
+.btn-danger:hover {
+  background: var(--red-dark);
+  border-color: var(--red-dark);
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: var(--navbar-height);
+  background: #fff;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+}
+
+.navbar__inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Logo */
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: var(--blue);
+  margin-right: 16px;
+  white-space: nowrap;
+}
+
+.navbar__logo-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--blue);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+/* Nav links */
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+.navbar__links a {
+  padding: 6px 12px;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--gray-600);
+  transition: color var(--transition), background var(--transition);
+  white-space: nowrap;
+}
+
+.navbar__links a:hover {
+  color: var(--blue);
+  background: var(--blue-light);
+}
+
+/* Trang đang mở — in đậm */
+.navbar__links a.active {
+  color: var(--blue);
+  font-weight: 700;
+  background: var(--blue-light);
+}
+
+/* Search */
+.navbar__search {
+  position: relative;
+  margin-left: auto;
+}
+
+.navbar__search input {
+  width: 200px;
+  padding: 7px 14px 7px 36px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--gray-800);
+  background: var(--gray-100);
+  transition: border-color var(--transition), width var(--transition);
+  outline: none;
+}
+
+.navbar__search input:focus {
+  border-color: var(--blue);
+  width: 260px;
+  background: #fff;
+}
+
+.navbar__search input::placeholder {
+  color: var(--gray-400);
+}
+
+.navbar__search-icon {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: var(--gray-400);
+  pointer-events: none;
+}
+
+/* Search dropdown */
+.navbar__search-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 320px;
+  background: #fff;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  z-index: 200;
+  overflow: hidden;
+}
+
+.navbar__search-dropdown.show {
+  display: block;
+}
+
+.search-dropdown__section {
+  padding: 8px 0;
+}
+
+.search-dropdown__label {
+  padding: 4px 16px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.search-dropdown__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 16px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  color: var(--gray-800);
+  transition: background var(--transition);
+}
+
+.search-dropdown__item:hover {
+  background: var(--gray-100);
+}
+
+.search-dropdown__item-tag {
+  font-size: 0.75rem;
+  background: var(--blue-light);
+  color: var(--blue);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-weight: 600;
+}
+
+.search-dropdown__empty {
+  padding: 16px;
+  text-align: center;
+  color: var(--gray-400);
+  font-size: 0.88rem;
+}
+
+/* ---------- Newton AI FAB (nút tròn góc dưới phải) ---------- */
+.fab-newton {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 900;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(2, 132, 199, 0.45);
+  transition: background var(--transition), transform var(--transition),
+              box-shadow var(--transition);
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+
+.fab-newton:hover {
+  background: var(--blue-dark);
+  transform: scale(1.08);
+  box-shadow: 0 6px 24px rgba(2, 132, 199, 0.55);
+}
+
+.fab-newton__tooltip {
+  position: absolute;
+  right: 68px;
+  background: var(--gray-800);
+  color: #fff;
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition);
+}
+
+.fab-newton:hover .fab-newton__tooltip {
+  opacity: 1;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  background: var(--gray-800);
+  color: #cbd5e1;
+  padding: 40px 24px 24px;
+}
+
+.footer__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: start;
+}
+
+.footer__brand-name {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.footer__brand-sub {
+  font-size: 0.88rem;
+  color: var(--gray-400);
+}
+
+.footer__col-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 14px;
+}
+
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer__links a {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  transition: color var(--transition);
+}
+
+.footer__links a:hover {
+  color: #fff;
+}
+
+.footer__divider {
+  border: none;
+  border-top: 1px solid #334155;
+  margin: 24px 0 16px;
+}
+
+.footer__bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  font-size: 0.82rem;
+  color: var(--gray-400);
+  text-align: center;
+}
+
+/* ---------- Section wrapper ---------- */
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 64px 24px;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: var(--gray-800);
+  margin-bottom: 8px;
+}
+
+.section-sub {
+  font-size: 0.95rem;
+  color: var(--gray-600);
+  margin-bottom: 40px;
+}
+
+/* ---------- Utility ---------- */
+.text-center { text-align: center; }
+.mt-4  { margin-top: 1rem; }
+.mt-8  { margin-top: 2rem; }
+.mb-4  { margin-bottom: 1rem; }

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .input-group { background: lightblue; padding: 20px; }
+    .input-group.hidden { display: none; }
+  </style>
+</head>
+<body>
+  <h3>Test toggle hidden</h3>
+  <div class="input-group hidden" id="inputsFriction">
+    <p>Friction inputs here</p>
+    <select id="surfaceSelect"><option>Test</option></select>
+    <input type="range" id="sliderMassFric" value="5"/>
+    <span id="valMassFric"></span>
+  </div>
+  <button onclick="test()">Switch to Friction</button>
+  <script>
+    function test() {
+      const name = 'friction';
+      document.getElementById('inputsFriction').classList.toggle('hidden', name !== 'friction');
+      console.log('After toggle, hidden?', document.getElementById('inputsFriction').classList.contains('hidden'));
+      
+      // Sync sliders như lab.js
+      const sliderMass = document.getElementById('sliderMassFric');
+      if (sliderMass) {
+        document.getElementById('valMassFric').textContent = sliderMass.value + ' kg';
+        console.log('Slider value:', sliderMass.value);
+      } else {
+        console.error('sliderMassFric not found!');
+      }
+    }
+  </script>
+</body>
+</html>
